@@ -13,17 +13,24 @@ using namespace std;
 
 int GetRandomNumber();
 int GetUserChoice();
-int DetermineOutcome();
+int DetermineOutcome(int ComputerPick, int UserPick);
 void GameDisplay();
 void ReplayQuit();
 
 int main()
 {
+    GetRandomNumber();
+    
     GameDisplay();
 
     GetUserChoice();
 
-    DetermineOutcome();
+    int ComputerPick = GetRandomNumber();
+    int UserPick = GetUserChoice();
+
+    DetermineOutcome(ComputerPick, UserPick);
+
+    
 }
 
 //Creates a random number from 1-3 to simulate rock, paper, scissors
@@ -49,36 +56,33 @@ void GameDisplay() {
 int GetUserChoice() {
     int UserChoice;
 
-    cin >> UserChoice;
-
     do {
         cin >> UserChoice;
         
         if (UserChoice < 1 || UserChoice > 3) {
             cout << "Please choose a number from 1 - 3: ";
         }
-    } while (UserChoice > 1 || UserChoice < 3);
-        
+    } while (UserChoice >= 1 || UserChoice <= 3);
     
-    
+    return UserChoice;
 }
 
 
 
 //Function receives value from RockPaperScissor function and will increment win,loss, and draw values. Those values will be displayed
 //at the end of the game to the user. 
-int DetermineOutcome(int UserChoice, int ComputerChoice) {
+int DetermineOutcome(int ComputerPick, int UserPick) {
     int Wins = 0,
         Losses = 0,
         Draws = 0;
 
-    if (UserChoice == ComputerChoice) {
+    if (UserPick == ComputerPick) {
         cout << "Draw\n";
         Draws++;
         
         return Draws;
     }
-    else if ((UserChoice == 1 && ComputerChoice == 3) || (UserChoice == 2 && ComputerChoice == 1) || (UserChoice == 3 && ComputerChoice == 2)) {
+    else if ((UserPick == 1 && ComputerPick == 3) || (UserPick == 2 && ComputerPick == 1) || (UserPick == 3 && ComputerPick == 2)) {
         cout << "Win\n";
         Wins++;
 
