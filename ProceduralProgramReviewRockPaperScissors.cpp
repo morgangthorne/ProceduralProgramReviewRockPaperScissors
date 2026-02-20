@@ -19,11 +19,8 @@ void ReplayQuit();
 
 int main()
 {
-    GetRandomNumber();
-    
+   
     GameDisplay();
-
-    GetUserChoice();
 
     int ComputerPick = GetRandomNumber();
     int UserPick = GetUserChoice();
@@ -54,17 +51,24 @@ void GameDisplay() {
 
 //Function validates user's input then result is sent to WinLossDrawValidator
 int GetUserChoice() {
-    int UserChoice;
+    int UserPick;
 
     do {
-        cin >> UserChoice;
         
-        if (UserChoice < 1 || UserChoice > 3) {
-            cout << "Please choose a number from 1 - 3: ";
+        if (!(cin >> UserPick)) {
+            cout << "Enter a number: ";
+            
+            cin.clear();
+            cin.ignore();
+            
         }
-    } while (UserChoice >= 1 || UserChoice <= 3);
-    
-    return UserChoice;
+        else if (UserPick < 1 || UserPick > 3) {
+            cout << "Enter a number between 1 and 3: ";
+
+        }
+    } while (UserPick < 1 || UserPick > 3); 
+      return UserPick;
+   
 }
 
 
