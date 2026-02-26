@@ -12,22 +12,33 @@ Program: Create a modular program using the <random> library. The program will a
 using namespace std;
 
 int GetRandomNumber();
-int GetUserChoice();
+int GetValidUserChoice();
 int DetermineOutcome(int ComputerPick, int UserPick);
 void GameDisplay();
-void ReplayQuit();
+void OutcomeTracker(); 
+int GetValidReplayQuit();
+
+
 
 int main()
 {
-   
+    bool Play = GetValidReplayQuit();
+    
     GameDisplay();
 
-    int ComputerPick = GetRandomNumber();
-    int UserPick = GetUserChoice();
+    if (Play == true) {
+       
+        int ComputerPick = GetRandomNumber();
+        int UserPick = GetValidUserChoice();
 
-    DetermineOutcome(ComputerPick, UserPick);
+        DetermineOutcome(ComputerPick, UserPick);
+
+    }
+    
+
 
     
+
 }
 
 //Creates a random number from 1-3 to simulate rock, paper, scissors
@@ -50,25 +61,25 @@ void GameDisplay() {
 
 
 //Function validates user's input then result is sent to WinLossDrawValidator
-int GetUserChoice() {
-    int UserPick;
+int GetValidUserChoice() {
+    int UserChoice;
 
     do {
         
-        if (!(cin >> UserPick)) {
+        if (!(cin >> UserChoice)) {
             cout << "Enter a number: ";
             
             cin.clear();
             cin.ignore();
             
         }
-        else if (UserPick < 1 || UserPick > 3) {
+        else if (UserChoice < 1 || UserChoice > 3) {
             cout << "Enter a number between 1 and 3: ";
 
         }
-    } while (UserPick < 1 || UserPick > 3); 
-      return UserPick;
-   
+    } while (UserChoice < 1 || UserChoice > 3); 
+     
+    return UserChoice;
 }
 
 
@@ -80,6 +91,8 @@ int DetermineOutcome(int ComputerPick, int UserPick) {
         Losses = 0,
         Draws = 0;
 
+    cout << "You picked " << UserPick << " the computer picked " << ComputerPick << endl;;
+    
     if (UserPick == ComputerPick) {
         cout << "Draw\n";
         Draws++;
@@ -103,17 +116,27 @@ int DetermineOutcome(int ComputerPick, int UserPick) {
 }
 
 //Function will let user choose to keep playing or quit
-void ReplayQuit() {
-    string DoAgain;
-
+int GetValidReplayQuit() {
+    int DoAgain;
+    
     do {
 
-        int Number = GetRandomNumber();
+        if (!(cin >> DoAgain)) {
+            cout << "Enter a number: ";
 
-        //int GameResult = RockPaperScissorsValidator(Number);
+            cin.clear();
+            cin.ignore();
 
+        }
+        else if (DoAgain < 1 || DoAgain > 2) {
+            cout << "Enter a numbers 1 or 2: ";
 
-    } while (DoAgain == "Yes" || DoAgain == "yes");
-    cout << "Thank you for playing!\n";
+        }
+    } while (DoAgain < 1 || DoAgain > 2);
+
+    return DoAgain;
+}
+
+void OutcomeTracker() {
 
 }
