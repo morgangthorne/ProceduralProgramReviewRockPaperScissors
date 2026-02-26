@@ -15,10 +15,8 @@ int GetRandomNumber();
 int GetValidUserChoice();
 int DetermineOutcome(int ComputerPick, int UserPick);
 void GameDisplay();
-void OutcomeTracker(); 
+void OutcomeTracker(int GameResult); 
 int GetValidReplayQuit();
-
-
 
 int main()
 {
@@ -29,8 +27,9 @@ int main()
         int ComputerPick = GetRandomNumber();
         int UserPick = GetValidUserChoice();
 
-        DetermineOutcome(ComputerPick, UserPick);
+        int GameResult = DetermineOutcome(ComputerPick, UserPick);
         
+        OutcomeTracker(GameResult);
 
          
     } while (GetValidReplayQuit() == 1);
@@ -38,11 +37,6 @@ int main()
         cout << "Thank you for playing.";
         
         return 0;
-    
-
-
-    
-
 }
 
 //Creates a random number from 1-3 to simulate rock, paper, scissors
@@ -88,35 +82,33 @@ int GetValidUserChoice() {
 
 
 
-//Function receives value from RockPaperScissor function and will increment win,loss, and draw values. Those values will be displayed
-//at the end of the game to the user. 
+/*
+1 - Function receives and displays numbers genreated by GetRandomNumber(); and GetValidUserChoice(); 
+2 - if, else if, and else statement used to determine game logic
+3 - Based off logic int Result is given a value that gets passed to main.
+*/
 int DetermineOutcome(int ComputerPick, int UserPick) {
-    int Wins = 0,
-        Losses = 0,
-        Draws = 0;
+    int Result;
 
     cout << "You picked " << UserPick << " the computer picked " << ComputerPick << endl;;
     
     if (UserPick == ComputerPick) {
         cout << "Draw\n";
-        Draws++;
         
-        return Draws;
+        Result = 1;
     }
     else if ((UserPick == 1 && ComputerPick == 3) || (UserPick == 2 && ComputerPick == 1) || (UserPick == 3 && ComputerPick == 2)) {
         cout << "Win\n";
-        Wins++;
-
-        return Wins;
+        
+        Result = 2;
     }
     else {
         cout << "Loss\n";
-        Losses++;
-
-        return Losses;
+        
+        Result = 3;
     }
     
-    return 0;
+    return Result;
 }
 
 //Function will let user choose to keep playing or quit
@@ -143,6 +135,6 @@ int GetValidReplayQuit() {
     return DoAgain;
 }
 
-void OutcomeTracker() {
+void OutcomeTracker(int GameResult) {
 
 }
