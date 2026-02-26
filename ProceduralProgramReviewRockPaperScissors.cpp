@@ -22,18 +22,22 @@ int GetValidReplayQuit();
 
 int main()
 {
-    bool Play = GetValidReplayQuit();
-    
-    GameDisplay();
+    do {
 
-    if (Play == true) {
-       
+        GameDisplay();
+
         int ComputerPick = GetRandomNumber();
         int UserPick = GetValidUserChoice();
 
         DetermineOutcome(ComputerPick, UserPick);
+        
 
-    }
+         
+    } while (GetValidReplayQuit() == 1);
+
+        cout << "Thank you for playing.";
+        
+        return 0;
     
 
 
@@ -118,6 +122,8 @@ int DetermineOutcome(int ComputerPick, int UserPick) {
 //Function will let user choose to keep playing or quit
 int GetValidReplayQuit() {
     int DoAgain;
+    
+    cout << "Would you like to replay(1) or Quit(2): ";
     
     do {
 
