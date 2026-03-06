@@ -35,13 +35,13 @@ int main()
         int GameResult = DetermineOutcome(ComputerPick, UserPick);
         
         OutcomeTracker(GameResult, &Draw, &Wins, &Loss);
-
-        OutcomeDisplay(Draw, Wins, Loss);
          
     } while (GetValidReplayQuit() == 1);
 
         cout << "Thank you for playing.";
         
+        OutcomeDisplay(Draw, Wins, Loss);
+
         return 0;
 }
 
