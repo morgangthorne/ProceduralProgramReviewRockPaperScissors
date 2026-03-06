@@ -1,4 +1,4 @@
-/* 
+/* +
 FileName: ProceduralProgramReviewRockPaperScissors.cpp
 Programmer: Morgan Thorne
 Date: February 2026
@@ -15,11 +15,16 @@ int GetRandomNumber();
 int GetValidUserChoice();
 int DetermineOutcome(int ComputerPick, int UserPick);
 void GameDisplay();
-void OutcomeTracker(int GameResult); 
+int OutcomeTracker(int GameResult, int *Draw, int *Wins, int *Loss); 
 int GetValidReplayQuit();
+void OutcomeDisplay(int Draw, int Wins, int Loss);
 
 int main()
 {
+    int Draw = 0;
+    int Wins = 0;
+    int Loss = 0;
+    
     do {
 
         GameDisplay();
@@ -29,8 +34,9 @@ int main()
 
         int GameResult = DetermineOutcome(ComputerPick, UserPick);
         
-        OutcomeTracker(GameResult);
+        OutcomeTracker(GameResult, &Draw, &Wins, &Loss);
 
+        OutcomeDisplay(Draw, Wins, Loss);
          
     } while (GetValidReplayQuit() == 1);
 
@@ -49,14 +55,12 @@ int GetRandomNumber() {
     return Number;
 }
 
-
 //Function Displays directions for the game
 void GameDisplay() {
     cout << "---------------------------------------------\n";
 
     cout << "Choose Rock (1), Paper (2), or Scissors(3): ";
 }
-
 
 //Function validates user's input then result is sent to WinLossDrawValidator
 int GetValidUserChoice() {
@@ -79,8 +83,6 @@ int GetValidUserChoice() {
      
     return UserChoice;
 }
-
-
 
 /*
 1 - Function receives and displays numbers genreated by GetRandomNumber(); and GetValidUserChoice(); 
@@ -115,7 +117,7 @@ int DetermineOutcome(int ComputerPick, int UserPick) {
 int GetValidReplayQuit() {
     int DoAgain;
     
-    cout << "Would you like to replay(1) or Quit(2): ";
+    cout << "Would you like to replay(1) or Quit(2): \n";
     
     do {
 
@@ -124,17 +126,30 @@ int GetValidReplayQuit() {
 
             cin.clear();
             cin.ignore();
-
         }
         else if (DoAgain < 1 || DoAgain > 2) {
             cout << "Enter a numbers 1 or 2: ";
-
         }
     } while (DoAgain < 1 || DoAgain > 2);
 
     return DoAgain;
 }
 
-void OutcomeTracker(int GameResult) {
+int OutcomeTracker(int GameResult, int *Draw, int *Wins, int *Loss) {
+    
+    if (GameResult == 1) {
+        (*Draw)++;
+    }
+    else if (GameResult == 2) {
+        (*Wins)++;
+    }
+    else {
+        (*Loss)++;
+    }
+    return 0;
+}
 
+
+void OutcomeDisplay(int Draw, int Wins, int Loss) {
+    cout << "Results are: \n" << Draw << " Draws, " << Wins << " Wins, " << Loss << " Losses";
 }
