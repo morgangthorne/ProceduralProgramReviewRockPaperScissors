@@ -38,7 +38,7 @@ int main()
          
     } while (GetValidReplayQuit() == 1);
 
-        cout << "Thank you for playing.";
+        cout << "Thank you for playing.\n";
         
         OutcomeDisplay(Draw, Wins, Loss);
 
@@ -62,7 +62,7 @@ void GameDisplay() {
     cout << "Choose Rock (1), Paper (2), or Scissors(3): ";
 }
 
-//Function validates user's input then result is sent to WinLossDrawValidator
+//Function validates user's input with a do while loop then valid result is sent to WinLossDrawValidator
 int GetValidUserChoice() {
     int UserChoice;
 
@@ -73,7 +73,6 @@ int GetValidUserChoice() {
             
             cin.clear();
             cin.ignore();
-            
         }
         else if (UserChoice < 1 || UserChoice > 3) {
             cout << "Enter a number between 1 and 3: ";
@@ -113,7 +112,7 @@ int DetermineOutcome(int ComputerPick, int UserPick) {
     return Result;
 }
 
-//Function will let user choose to keep playing or quit
+//Function uses do while loop to validate input, input is then returned to main 
 int GetValidReplayQuit() {
     int DoAgain;
     
@@ -135,6 +134,7 @@ int GetValidReplayQuit() {
     return DoAgain;
 }
 
+//Uses pointers to change the result of Draw, Wins, and Loss variables in main. 
 int OutcomeTracker(int GameResult, int *Draw, int *Wins, int *Loss) {
     
     if (GameResult == 1) {
@@ -149,7 +149,7 @@ int OutcomeTracker(int GameResult, int *Draw, int *Wins, int *Loss) {
     return 0;
 }
 
-
+//Displays values from OutcomeTracker.
 void OutcomeDisplay(int Draw, int Wins, int Loss) {
     cout << "Results are: \n" << Draw << " Draws, " << Wins << " Wins, " << Loss << " Losses";
 }
