@@ -37,8 +37,6 @@ int main()
         OutcomeTracker(GameResult, &Draw, &Wins, &Loss);
          
     } while (GetValidReplayQuit() == 1);
-
-        cout << "Thank you for playing.\n";
         
         OutcomeDisplay(Draw, Wins, Loss);
 
@@ -151,5 +149,11 @@ int OutcomeTracker(int GameResult, int *Draw, int *Wins, int *Loss) {
 
 //Displays values from OutcomeTracker.
 void OutcomeDisplay(int Draw, int Wins, int Loss) {
+    cout << "Thank you for playing.\n";
     cout << "Results are: \n" << Draw << " Draws, " << Wins << " Wins, " << Loss << " Losses";
 }
+
+
+//Need to add further input validation for GetValidUserChoice. If user enters a string or more than one character, enter a number
+//will be repeated for the amount of char sent in 
+//If user enters a single digit integer presses space then enters another single integer the buffer is not being cleared and enters the second integer automatically.
