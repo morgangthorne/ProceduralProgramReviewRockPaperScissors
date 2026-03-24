@@ -8,6 +8,7 @@ Program: Create a modular program using the <random> library. The program will a
 
 #include <iostream>
 #include <random>
+#include <limits>
 
 using namespace std;
 
@@ -70,7 +71,7 @@ int GetValidUserChoice() {
             cout << "Enter a number: ";
             
             cin.clear();
-            cin.ignore();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
         else if (UserChoice < 1 || UserChoice > 3) {
             cout << "Enter a number between 1 and 3: ";
