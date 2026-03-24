@@ -15,6 +15,7 @@ using namespace std;
 int GetRandomNumber();
 int GetValidUserChoice();
 int DetermineOutcome(int ComputerPick, int UserPick);
+void ChoiceToStringConverter(int ComputerPick, int UserPick);
 void GameDisplay();
 int OutcomeTracker(int GameResult, int *Draw, int *Wins, int *Loss); 
 int GetValidReplayQuit();
@@ -34,6 +35,8 @@ int main()
         int UserPick = GetValidUserChoice();
 
         int GameResult = DetermineOutcome(ComputerPick, UserPick);
+
+        ChoiceToStringConverter(ComputerPick, UserPick);
         
         OutcomeTracker(GameResult, &Draw, &Wins, &Loss);
          
@@ -75,11 +78,39 @@ int GetValidUserChoice() {
         }
         else if (UserChoice < 1 || UserChoice > 3) {
             cout << "Enter a number between 1 and 3: ";
-
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
     } while (UserChoice < 1 || UserChoice > 3); 
      
     return UserChoice;
+}
+
+void ChoiceToStringConverter(int ComputerPick, int UserPick) {
+    string UserPickString;
+    string ComputerPickString;
+
+
+    if (UserPick == 1) {
+        UserPickString = "Rock";
+    }
+    else if (UserPick == 2) {
+        UserPickString = "Paper";
+    }
+    else {
+        UserPickString = "Scissors";
+    }
+    //
+    if (ComputerPick == 1) {
+        ComputerPickString = "Rock";
+    }
+    else if (ComputerPick == 2) {
+        ComputerPickString = "Paper";
+    }
+    else {
+        ComputerPickString = "Scissors";
+    }
+
+    cout << "You picked " << UserPickString << " the computer picked " << ComputerPickString << endl;;
 }
 
 /*
@@ -89,21 +120,19 @@ int GetValidUserChoice() {
 */
 int DetermineOutcome(int ComputerPick, int UserPick) {
     int Result;
-
-    cout << "You picked " << UserPick << " the computer picked " << ComputerPick << endl;;
     
     if (UserPick == ComputerPick) {
-        cout << "Draw\n";
+        cout << "Draw!\n";
         
         Result = 1;
     }
     else if ((UserPick == 1 && ComputerPick == 3) || (UserPick == 2 && ComputerPick == 1) || (UserPick == 3 && ComputerPick == 2)) {
-        cout << "Win\n";
+        cout << "You Win!\n";
         
         Result = 2;
     }
     else {
-        cout << "Loss\n";
+        cout << "You Lose!\n";
         
         Result = 3;
     }
@@ -115,7 +144,7 @@ int DetermineOutcome(int ComputerPick, int UserPick) {
 int GetValidReplayQuit() {
     int DoAgain;
     
-    cout << "Would you like to replay(1) or Quit(2): \n";
+    cout << "Would you like to replay(1) or Quit(2): ";
     
     do {
 
@@ -123,10 +152,11 @@ int GetValidReplayQuit() {
             cout << "Enter a number: ";
 
             cin.clear();
-            cin.ignore();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
         else if (DoAgain < 1 || DoAgain > 2) {
             cout << "Enter a numbers 1 or 2: ";
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
     } while (DoAgain < 1 || DoAgain > 2);
 
@@ -155,6 +185,3 @@ void OutcomeDisplay(int Draw, int Wins, int Loss) {
 }
 
 
-//Need to add further input validation for GetValidUserChoice. If user enters a string or more than one character, enter a number
-//will be repeated for the amount of char sent in 
-//If user enters a single digit integer presses space then enters another single integer the buffer is not being cleared and enters the second integer automatically.
