@@ -15,7 +15,7 @@ using namespace std;
 int GetRandomNumber();
 int GetValidUserChoice();
 int DetermineOutcome(int ComputerPick, int UserPick);
-void ChoiceToStringConverter(int ComputerPick, int UserPick);
+void ChoiceStringDisplay(int ComputerPick, int UserPick);
 void GameDisplay();
 void OutcomeTracker(int GameResult, int *Draw, int *Wins, int *Loss); 
 int GetValidReplayQuit();
@@ -34,7 +34,7 @@ int main()
         int ComputerPick = GetRandomNumber();
         int UserPick = GetValidUserChoice();
 
-        ChoiceToStringConverter(ComputerPick, UserPick);
+        ChoiceStringDisplay(ComputerPick, UserPick);
         
         int GameResult = DetermineOutcome(ComputerPick, UserPick);
         
@@ -94,7 +94,7 @@ static string Convert(int choice) {
 
 
 //Function calls the Convert function then displays the choices of the game in rock, paper, or scissors.
-void ChoiceToStringConverter(int ComputerPick, int UserPick) {
+void ChoiceStringDisplay(int ComputerPick, int UserPick) {
  
     cout << "You picked " << Convert(UserPick) << " the computer picked " << Convert(ComputerPick) << endl;
 }
