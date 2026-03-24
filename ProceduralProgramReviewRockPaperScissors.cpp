@@ -34,8 +34,6 @@ int main()
         int ComputerPick = GetRandomNumber();
         int UserPick = GetValidUserChoice();
 
-        string Convert(int choice);
-
         ChoiceToStringConverter(ComputerPick, UserPick);
         
         int GameResult = DetermineOutcome(ComputerPick, UserPick);
@@ -87,14 +85,15 @@ int GetValidUserChoice() {
     return UserChoice;
 }
 
-string Convert(int choice) {
+//function get value for int choice from ChoiceToStringConverter, then assigns a string to the corresponding number
+static string Convert(int choice) {
     if (choice == 1) return "Rock";
     if (choice == 2) return "Paper";
     return "Scissors";
 }
 
 
-//Function reads what choices were made by the user and computer then converts them to their corresponding string, those choices are then displayed. 
+//Function calls the Convert function then displays the choices of the game in rock, paper, or scissors.
 void ChoiceToStringConverter(int ComputerPick, int UserPick) {
  
     cout << "You picked " << Convert(UserPick) << " the computer picked " << Convert(ComputerPick) << endl;
