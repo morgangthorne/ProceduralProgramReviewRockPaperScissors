@@ -17,7 +17,7 @@ int GetValidUserChoice();
 int DetermineOutcome(int ComputerPick, int UserPick);
 void ChoiceToStringConverter(int ComputerPick, int UserPick);
 void GameDisplay();
-int OutcomeTracker(int GameResult, int *Draw, int *Wins, int *Loss); 
+void OutcomeTracker(int GameResult, int *Draw, int *Wins, int *Loss); 
 int GetValidReplayQuit();
 void OutcomeDisplay(int Draw, int Wins, int Loss);
 
@@ -34,9 +34,11 @@ int main()
         int ComputerPick = GetRandomNumber();
         int UserPick = GetValidUserChoice();
 
-        int GameResult = DetermineOutcome(ComputerPick, UserPick);
+        string Convert(int choice);
 
         ChoiceToStringConverter(ComputerPick, UserPick);
+        
+        int GameResult = DetermineOutcome(ComputerPick, UserPick);
         
         OutcomeTracker(GameResult, &Draw, &Wins, &Loss);
          
@@ -85,32 +87,17 @@ int GetValidUserChoice() {
     return UserChoice;
 }
 
+string Convert(int choice) {
+    if (choice == 1) return "Rock";
+    if (choice == 2) return "Paper";
+    return "Scissors";
+}
+
+
+//Function reads what choices were made by the user and computer then converts them to their corresponding string, those choices are then displayed. 
 void ChoiceToStringConverter(int ComputerPick, int UserPick) {
-    string UserPickString;
-    string ComputerPickString;
-
-
-    if (UserPick == 1) {
-        UserPickString = "Rock";
-    }
-    else if (UserPick == 2) {
-        UserPickString = "Paper";
-    }
-    else {
-        UserPickString = "Scissors";
-    }
-    //
-    if (ComputerPick == 1) {
-        ComputerPickString = "Rock";
-    }
-    else if (ComputerPick == 2) {
-        ComputerPickString = "Paper";
-    }
-    else {
-        ComputerPickString = "Scissors";
-    }
-
-    cout << "You picked " << UserPickString << " the computer picked " << ComputerPickString << endl;;
+ 
+    cout << "You picked " << Convert(UserPick) << " the computer picked " << Convert(ComputerPick) << endl;
 }
 
 /*
@@ -155,7 +142,7 @@ int GetValidReplayQuit() {
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
         else if (DoAgain < 1 || DoAgain > 2) {
-            cout << "Enter a numbers 1 or 2: ";
+            cout << "Enter number 1 or 2: ";
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
     } while (DoAgain < 1 || DoAgain > 2);
@@ -164,7 +151,7 @@ int GetValidReplayQuit() {
 }
 
 //Uses pointers to change the result of Draw, Wins, and Loss variables in main. 
-int OutcomeTracker(int GameResult, int *Draw, int *Wins, int *Loss) {
+void OutcomeTracker(int GameResult, int *Draw, int *Wins, int *Loss) {
     
     if (GameResult == 1) {
         (*Draw)++;
@@ -175,7 +162,6 @@ int OutcomeTracker(int GameResult, int *Draw, int *Wins, int *Loss) {
     else {
         (*Loss)++;
     }
-    return 0;
 }
 
 //Displays values from OutcomeTracker.
